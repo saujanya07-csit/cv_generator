@@ -1,0 +1,16 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Resumé.AI — Python Dependencies
+# Install:  pip install -r requirements.txt
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Web Framework
+flask>=3.0.0
+python-dotenv>=1.0.0
+waitress>=3.0.0
+
+# PDF Generation — pick ONE (both installed for fallback chain)
+weasyprint>=62.0              # Preferred: best CSS support
+pdfkit>=1.0.0                 # Alternative: wraps wkhtmltopdf
+
+# Utilities
+Jinja2>=3.1.0                 # Already a Flask dep, listed for clarity

@@ -1,0 +1,23 @@
+{% from "cv_parts/_macros.html" import section %}
+
+{% call section("PROFESSIONAL EXPERIENCE") %}
+  {% for exp in (experience or []) %}
+    <div class="cv-exp">
+      <div class="cv-exp__header">
+        {% if exp.duration %}<div class="cv-exp__duration">{{ exp.duration }}</div>{% endif %}
+        <div class="cv-exp__title">
+          {%- if exp.role -%}{{ exp.role }}{%- endif -%}
+          {%- if exp.company -%}{{ ", " if exp.role else "" }}{{ exp.company }}{%- endif -%}
+        </div>
+      </div>
+      {% if exp.bullets %}
+        <div class="cv-exp__bullets">
+          {% for b in exp.bullets %}
+            <div class="cv-line">{{ b }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endcall %}
+

@@ -1,0 +1,13 @@
+<header class="cv-header">
+  <div class="cv-name">{{ (name or "") | upper }}</div>
+  <div class="cv-contact">
+    {%- set parts = [] -%}
+    {%- if location %}{% set _ = parts.append(location) %}{% endif -%}
+    {%- if phone %}{% set _ = parts.append(phone) %}{% endif -%}
+    {%- if email %}{% set _ = parts.append(email) %}{% endif -%}
+    {%- if linkedin %}{% set _ = parts.append(linkedin) %}{% endif -%}
+    {%- if github %}{% set _ = parts.append(github) %}{% endif -%}
+    {{ parts | join(' | ') }}
+  </div>
+</header>
+

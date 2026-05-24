@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV – {{ name }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Page Setup ─────────────────────────────────────────────────── */
+    @page { size: A4; margin: 18mm 18mm 18mm 18mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; }
+
+    body {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 400;
+      line-height: 1.45;
+      color: #1a1a1a;
+      background: #fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────────── */
+    .cv-header {
+      text-align: center;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .cv-name {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-size: 26pt;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #1a1a1a;
+      line-height: 1.1;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .cv-contact {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.5pt;
+      font-weight: 400;
+      color: #1a1a1a;
+      line-height: 1.4;
+    }
+
+    .cv-contact a {
+      color: #1a1a1a;
+      text-decoration: underline;
+    }
+
+    .cv-contact .separator {
+      margin: 0 4px;
+    }
+
+    /* ── Horizontal Rule (thin black line under header & sections) ───── */
+    hr.cv-rule {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      margin: 0 0 8px 0;
+    }
+
+    hr.cv-rule-top {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      margin: 0;
+    }
+
+    /* Header bottom line */
+    .cv-header hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      margin: 6px 0 0 0;
+    }
+
+    /* ── Section titles ─────────────────────────────────────────────── */
+    .cv-section {
+      margin-bottom: 6px;
+    }
+
+    .cv-section__title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin: 10px 0 0 0;
+      padding-bottom: 2px;
+    }
+
+    /* ── Summary / Profile ──────────────────────────────────────────── */
+    .cv-summary {
+      font-size: 9.8pt;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #1a1a1a;
+      margin: 8px 0 10px 0;
+      text-align: justify;
+    }
+
+    /* ── Experience ─────────────────────────────────────────────────── */
+    .cv-exp {
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .cv-exp__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .cv-exp__title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      flex: 1;
+    }
+
+    .cv-exp__duration {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .cv-exp__bullets {
+      margin-top: 3px;
+      padding-left: 18px;
+    }
+
+    .cv-exp__bullets li {
+      font-size: 9.8pt;
+      font-weight: 400;
+      line-height: 1.45;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+
+    /* ── Projects ───────────────────────────────────────────────────── */
+    .cv-project {
+      margin-top: 6px;
+      margin-bottom: 2px;
+    }
+
+    .cv-project__header {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.4;
+    }
+
+    .cv-project__tech {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 400;
+      color: #1a1a1a;
+    }
+
+    .cv-project__sep {
+      font-weight: 400;
+      margin: 0 3px;
+    }
+
+    .cv-project__bullets {
+      margin-top: 3px;
+      padding-left: 18px;
+    }
+
+    .cv-project__bullets li {
+      font-size: 9.8pt;
+      font-weight: 400;
+      line-height: 1.45;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+
+    /* ── Skills ─────────────────────────────────────────────────────── */
+    .cv-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px 16px;
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .cv-skill-item {
+      font-size: 9.8pt;
+      font-weight: 400;
+      color: #1a1a1a;
+      line-height: 1.45;
+    }
+
+    /* ── Education ──────────────────────────────────────────────────── */
+    .cv-edu {
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+
+    .cv-edu__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .cv-edu__left { flex: 1; }
+
+    .cv-edu__institution {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.35;
+    }
+
+    .cv-edu__degree {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 400;
+      color: #1a1a1a;
+      line-height: 1.35;
+    }
+
+    .cv-edu__right {
+      text-align: right;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .cv-edu__location {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.35;
+    }
+
+    .cv-edu__dates {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 9.8pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.35;
+    }
+
+    /* ── Additional Information ─────────────────────────────────────── */
+    .cv-additional {
+      margin-top: 6px;
+    }
+
+    .cv-additional-line {
+      font-size: 9.8pt;
+      font-weight: 400;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+
+    .cv-additional-label {
+      font-weight: 700;
+    }
+
+    /* ── Print / page-break guards ──────────────────────────────────── */
+    .cv-exp, .cv-project, .cv-edu { page-break-inside: avoid; break-inside: avoid; }
+  </style>
+</head>
+<body>
+
+  <!-- ════ HEADER ════ -->
+  <div class="cv-header">
+    <span class="cv-name">{{ name | upper }}</span>
+    <div class="cv-contact">
+      {% if address %}{{ address }}{% endif %}
+      {% if phone %}<span class="separator">|</span> {{ phone }}{% endif %}
+      {% if email %}<span class="separator">|</span> {{ email }}{% endif %}
+      {% if linkedin %}<span class="separator">|</span> <a href="{{ linkedin }}">Linkedin</a>{% endif %}
+      {% if github %}<span class="separator">|</span> <a href="{{ github }}">Github</a>{% endif %}
+    </div>
+    <hr>
+  </div>
+
+  <!-- ════ SUMMARY ════ -->
+  {% if summary %}
+  <div class="cv-section">
+    <p class="cv-summary">{{ summary }}</p>
+  </div>
+  {% endif %}
+
+  <!-- ════ PROFESSIONAL EXPERIENCE ════ -->
+  {% if experience %}
+  <div class="cv-section">
+    <div class="cv-section__title">Professional Experience</div>
+    <hr class="cv-rule">
+    {% for job in experience %}
+    <div class="cv-exp">
+      <div class="cv-exp__header">
+        <span class="cv-exp__title">{{ job.title }}{% if job.company %}, {{ job.company }}{% endif %}</span>
+        {% if job.duration %}<span class="cv-exp__duration">{{ job.duration }}</span>{% endif %}
+      </div>
+      {% if job.bullets %}
+      <ul class="cv-exp__bullets">
+        {% for bullet in job.bullets %}
+        <li>{{ bullet }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- ════ PROJECTS ════ -->
+  {% if projects %}
+  <div class="cv-section">
+    <div class="cv-section__title">Projects</div>
+    <hr class="cv-rule">
+    {% for project in projects %}
+    <div class="cv-project">
+      <div class="cv-project__header">
+        {{ project.name }}{% if project.tech %}<span class="cv-project__sep"> | </span><span class="cv-project__tech">{{ project.tech }}</span>{% endif %}
+      </div>
+      {% if project.bullets %}
+      <ul class="cv-project__bullets">
+        {% for bullet in project.bullets %}
+        <li>{{ bullet }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- ════ SKILLS ════ -->
+  {% if skills %}
+  <div class="cv-section">
+    <div class="cv-section__title">Skills</div>
+    <hr class="cv-rule">
+    <div class="cv-skills-grid">
+      {% for skill in skills %}
+      <div class="cv-skill-item">{{ skill }}</div>
+      {% endfor %}
+    </div>
+    <hr class="cv-rule-top" style="margin-top:6px;">
+  </div>
+  {% endif %}
+
+  <!-- ════ EDUCATION ════ -->
+  {% if education %}
+  <div class="cv-section">
+    <div class="cv-section__title">Education</div>
+    <hr class="cv-rule">
+    {% for edu in education %}
+    <div class="cv-edu">
+      <div class="cv-edu__row">
+        <div class="cv-edu__left">
+          <div class="cv-edu__institution">{{ edu.institution }}</div>
+          <div class="cv-edu__degree">{{ edu.degree }}</div>
+        </div>
+        <div class="cv-edu__right">
+          {% if edu.location %}<div class="cv-edu__location">{{ edu.location }}</div>{% endif %}
+          {% if edu.dates %}<div class="cv-edu__dates">{{ edu.dates }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- ════ ADDITIONAL INFORMATION ════ -->
+  {% if additional %}
+  <div class="cv-section">
+    <div class="cv-section__title">Additional Information</div>
+    <hr class="cv-rule">
+    <div class="cv-additional">
+      {% for item in additional %}
+      <div class="cv-additional-line">
+        {% if item.label %}<span class="cv-additional-label">{{ item.label }}:</span> {% endif %}{{ item.value }}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% from "cv_parts/_macros.html" import section %}
+
+{% call section("ADDITIONAL INFORMATION") %}
+  {% if languages %}
+    <div class="cv-info-line"><span class="cv-info-key">Languages:</span> {{ languages }}</div>
+  {% endif %}
+  {% if developer_tools %}
+    <div class="cv-info-line"><span class="cv-info-key">Developer Tools:</span> {{ developer_tools }}</div>
+  {% endif %}
+  {% if certifications %}
+    <div class="cv-info-line"><span class="cv-info-key">Certifications:</span> {{ certifications | join(', ') }}</div>
+  {% endif %}
+{% endcall %}
+

@@ -1,0 +1,16 @@
+{% from "cv_parts/_macros.html" import section %}
+
+{% call section("EDUCATION") %}
+  {% for edu in (education or []) %}
+    <div class="cv-row cv-edu">
+      <div class="cv-edu__left">
+        <div class="cv-edu__institution">{{ edu.institution }}</div>
+        {% if edu.degree %}<div class="cv-edu__degree">{{ edu.degree }}</div>{% endif %}
+      </div>
+      {% if edu.year %}
+        <div class="cv-edu__right">{{ edu.year }}</div>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endcall %}
+

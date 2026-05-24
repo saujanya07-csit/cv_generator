@@ -1,0 +1,8 @@
+{% from "cv_parts/_macros.html" import section %}
+
+{% call section("SKILLS") %}
+  {% for s in (skills or []) %}
+    <div class="cv-line">{{ s }}</div>
+  {% endfor %}
+{% endcall %}
+

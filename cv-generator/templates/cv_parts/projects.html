@@ -1,0 +1,18 @@
+{% from "cv_parts/_macros.html" import section %}
+
+{% call section("PROJECTS") %}
+  {% for p in (projects or []) %}
+    <div class="cv-project">
+      <div class="cv-project__title">
+        {{ p.title }}
+        {% if p.tech %}
+          <span class="cv-project__tech"> | {{ p.tech | join(', ') }}</span>
+        {% endif %}
+      </div>
+      {% if p.description %}
+        <div class="cv-project__desc">{{ p.description }}</div>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endcall %}
+
