@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Deploy specific version to server
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
@@ -37,8 +37,15 @@ jobs:
             echo "Checking out version..."
             git checkout ${{ github.ref_name }}
 
-            echo "Installing dependencies..."
-            /home/cvapp/cv_generator/cv-generator/venv/bin/pip install -r requirements.txt
+            echo "Setting up virtual environment..."
+
+            if [ ! -d "venv" ]; then
+              python3 -m venv venv
+            fi
+
+            source venv/bin/activate
+
+            pip install -r requirements.txt
 
             echo "Restarting service..."
             sudo systemctl restart cvgen
