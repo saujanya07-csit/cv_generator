@@ -26,8 +26,7 @@ jobs:
             # --- SAFE REPO CHECK ---
             if [ ! -d ".git" ]; then
               echo "Repo not found. Cloning..."
-              git clone <https://github.com/saujanya07-csit/cv_generator.git> .
-            fi
+              git clone git clone https://github.com/saujanya07-csit/cv_generator.git .
 
             echo "Fetching tags..."
             git fetch origin --tags
