@@ -1,0 +1,4 @@
+cv-generator/cv_env/
+venv/
+*.pyc
+__pycache__/
