@@ -23,29 +23,25 @@ jobs:
 
             APP_DIR="/home/cvapp/cv_generator/cv-generator/cv-generator"
 
-            if [ ! -d "$APP_DIR/.git" ]; then
-              echo "Repo not found. Cloning..."
-              rm -rf "$APP_DIR"
-              git clone https://github.com/saujanya07-csit/cv_generator.git "$APP_DIR"
-            fi
-
             cd "$APP_DIR"
 
-            echo "Fetching tags..."
+            echo "Fetching latest tags..."
             git fetch origin --tags
 
             echo "Checking out version..."
             git checkout ${{ github.ref_name }}
 
-            echo "Setting up virtual environment..."
+            echo "Cleaning old virtual environment..."
+            rm -rf venv
 
-            if [ ! -d "venv" ]; then
-              python3 -m venv venv
-            fi
+            echo "Creating fresh virtual environment..."
+            python3 -m venv venv
 
-            source venv/bin/activate
+            echo "Upgrading pip..."
+            ./venv/bin/pip install --upgrade pip
 
-            pip install -r requirements.txt
+            echo "Installing dependencies..."
+            ./venv/bin/pip install -r requirements.txt
 
             echo "Restarting service..."
             sudo systemctl restart cvgen
