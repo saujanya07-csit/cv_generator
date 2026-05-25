@@ -21,7 +21,7 @@ jobs:
 
             echo "Deploying version: ${{ github.ref_name }}"
 
-            APP_DIR="/home/cvapp/cv_generator/cv-generator"
+            APP_DIR="/home/cvapp/cv_generator/cv-generator/cv-generator"
 
             if [ ! -d "$APP_DIR/.git" ]; then
               echo "Repo not found. Cloning..."
